@@ -156,11 +156,20 @@ function NextQ(btnid) {
 function EndQuiz() {
   //when this funciton is called it ends the quiz and gives the option to enter initials
   var InitialsVal = InitialsText.value.trim();
+  if(InitialsVal === ""){
+    alert("No initials entered, entry will be saved with no initials")
+  };
   InitScores.Initials.unshift(InitialsVal);
   InitScores.Score.unshift(Score);
   HighScoreList.innerHTML = "";
   RenderScores();
 }
+
+//If user hits return instead of clicking Submit button then it calls the EndQuiz function through event listener
+InitialsForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+  EndQuiz();  
+});
 
 function RenderScores() {
   //this function is used to render the list of all the scores
