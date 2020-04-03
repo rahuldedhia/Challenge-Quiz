@@ -9,9 +9,9 @@ function renderTime() {
   secondsLeft = totalSeconds - secondsElapsed;
   secondsDisplay.textContent = secondsLeft;
   if (secondsElapsed >= totalSeconds) {
-    HighScoreList.innerHTML = "";
+    highScoreList.innerHTML = "";
     alert("You ran out of time, try again by using the 'Go Back' button below!");
-    RenderScores();
+    renderScores();
   }
 }
 
@@ -34,160 +34,160 @@ function stopTimer() {
 }
 
 //Using query selector for the required elements from html page
-var Content = document.querySelector("#Content");
-var StartContent = document.querySelector("#startcontent");
-var QuestList = document.querySelector("#Question");
-var AnsList = document.querySelector("#ans-list");
-var AnsOpt1 = document.querySelector("#ans-opt1");
-var AnsOpt2 = document.querySelector("#ans-opt2");
-var AnsOpt3 = document.querySelector("#ans-opt3");
-var AnsOpt4 = document.querySelector("#ans-opt4");
-var Answer = document.querySelector("#answer");
-var EndContent = document.querySelector("#endcontent");
-var FinalScore = document.querySelector("#finalscore");
-var ScoreList = document.querySelector("#scorelist");
-var InitialsForm = document.querySelector("#initials-form");
-var InitialsText = document.querySelector("#initials-text");
-var HighScoreList = document.querySelector("#highscorelist");
+var content = document.querySelector("#content");
+var startContent = document.querySelector("#startcontent");
+var questList = document.querySelector("#Question");
+var ansList = document.querySelector("#ans-list");
+var ansOpt1 = document.querySelector("#ans-opt1");
+var ansOpt2 = document.querySelector("#ans-opt2");
+var ansOpt3 = document.querySelector("#ans-opt3");
+var ansOpt4 = document.querySelector("#ans-opt4");
+var answer = document.querySelector("#answer");
+var endContent = document.querySelector("#endcontent");
+var finalScore = document.querySelector("#finalscore");
+var scoreList = document.querySelector("#scorelist");
+var initialsForm = document.querySelector("#initials-form");
+var initialsText = document.querySelector("#initials-text");
+var highScoreList = document.querySelector("#highscorelist");
 
-var Quests;
-var Score = 0;
-var Answ = "";
+var quests;
+var score = 0;
+var answ = "";
 
 //object to save the questions and answers. Last key value is used for saving the correct answers
 var quiz = {
-  Question: [
+  question: [
     "Commonly used Data types DO NOT include:",
     "The condition in an if / else statement is eclosed within:",
     "Arrays in JavaScript can be used to store:",
     "String values must be enclosed within _____ when being assigned to variables.",
     "A very useful tool used during development and debugging for printing content to the debugger is:"
   ],
-  AnsOpt1: [
+  ansOpt1: [
     "strings",
     "quotes",
     "numbers and strings",
     "commas",
     "console log"
   ],
-  AnsOpt2: [
+  ansOpt2: [
     "booleans",
     "parentheses",
     "other arrays",
     "curly brackets",
     "JavaScript"
   ],
-  AnsOpt3: [
+  ansOpt3: [
     "alerts", 
     "curly brackets", 
     "booleans", 
     "quotes", 
     "for loops"
   ],
-  AnsOpt4: [
+  ansOpt4: [
     "numbers",
     "square brackets",
     "all of the above",
     "parentheses",
     "terminal / bash"
   ],
-  CorrAns: [
-    "AnsOpt3", 
-    "AnsOpt2", 
-    "AnsOpt4", 
-    "AnsOpt3", 
-    "AnsOpt1"
+  corrAns: [
+    "ansOpt3", 
+    "ansOpt2", 
+    "ansOpt4", 
+    "ansOpt3", 
+    "ansOpt1"
   ]
 };
 
 //Object to save the initials and scores
-var InitScores = {
-  Initials: [],
-  Score: []
+var initScores = {
+  initials: [],
+  score: []
 };
 
 //all the html elements are made hidden
-Content.style.display = "none";
-EndContent.style.display = "none";
-ScoreList.style.display = "none";
+content.style.display = "none";
+endContent.style.display = "none";
+scoreList.style.display = "none";
 
-function StartQuiz() {
+function startQuiz() {
   //this function initiates the quiz
-  Quests = 0;
-  Answer.textContent = "";
-  StartContent.style.display = "none";
-  ScoreList.style.display = "none";
+  quests = 0;
+  answer.textContent = "";
+  startContent.style.display = "none";
+  scoreList.style.display = "none";
   startTimer();
   renderQues();
 }
 
 function renderQues() {
   //this function renders the questions on the page and at the end of all questions displays the final score
-  Content.style.display = "block";
-  if (Quests < quiz.Question.length) {
-    QuestList.textContent = quiz.Question[Quests];
-    AnsOpt1.textContent = quiz.AnsOpt1[Quests];
-    AnsOpt2.textContent = quiz.AnsOpt2[Quests];
-    AnsOpt3.textContent = quiz.AnsOpt3[Quests];
-    AnsOpt4.textContent = quiz.AnsOpt4[Quests];
+  content.style.display = "block";
+  if (quests < quiz.question.length) {
+    questList.textContent = quiz.question[quests];
+    ansOpt1.textContent = quiz.ansOpt1[quests];
+    ansOpt2.textContent = quiz.ansOpt2[quests];
+    ansOpt3.textContent = quiz.ansOpt3[quests];
+    ansOpt4.textContent = quiz.ansOpt4[quests];
   } else {
-    Content.style.display = "none";
-    EndContent.style.display = "block";
-    Score = secondsLeft;
-    FinalScore.textContent = "Your final score is " + Score;
+    content.style.display = "none";
+    endContent.style.display = "block";
+    score = secondsLeft;
+    finalScore.textContent = "Your final score is " + score;
     stopTimer();
   }
 }
 
-function NextQ(btnid) {
+function nextQ(btnid) {
   //this function is called when any of the answer button is clicked and validates if the answer is right or wrong
-  var SelAns = "AnsOpt" + btnid;
-  if (SelAns === quiz.CorrAns[Quests]) {
-    Answ = "Correct Answer";
+  var selAns = "ansOpt" + btnid;
+  if (selAns === quiz.corrAns[quests]) {
+    answ = "Correct Answer";
   } else {
-    Answ = "Wrong Answer";
+    answ = "Wrong Answer";
     secondsElapsed += 10;
   }
-  Answer.textContent = Answ;
-  Quests++;
+  answer.textContent = answ;
+  quests++;
   renderQues();
 }
 
-function EndQuiz() {
+function endQuiz() {
   //when this funciton is called it ends the quiz and gives the option to enter initials
-  var InitialsVal = InitialsText.value.trim();
+  var InitialsVal = initialsText.value.trim();
   if(InitialsVal === ""){
     alert("No initials entered, entry will be saved with no initials")
   };
-  InitScores.Initials.unshift(InitialsVal);
-  InitScores.Score.unshift(Score);
-  HighScoreList.innerHTML = "";
-  RenderScores();
+  initScores.initials.unshift(InitialsVal);
+  initScores.score.unshift(score);
+  highScoreList.innerHTML = "";
+  renderScores();
 }
 
 //If user hits return instead of clicking Submit button then it calls the EndQuiz function through event listener
-InitialsForm.addEventListener("submit", function(event) {
+initialsForm.addEventListener("submit", function(event) {
   event.preventDefault();
-  EndQuiz();  
+  endQuiz();  
 });
 
-function RenderScores() {
+function renderScores() {
   //this function is used to render the list of all the scores
-  EndContent.style.display = "none";
-  Content.style.display = "none";
-  ScoreList.style.display = "block";
+  endContent.style.display = "none";
+  content.style.display = "none";
+  scoreList.style.display = "block";
   
-  for (var i = 0; i < Object.values(InitScores.Initials).length; i++) {
+  for (var i = 0; i < Object.values(initScores.initials).length; i++) {
     var P = document.createElement("p");
-    P.textContent = "Initials: " + InitScores.Initials[i] + " Score: " + InitScores.Score[i];
-    HighScoreList.appendChild(P);
+    P.textContent = "Initials: " + initScores.initials[i] + " Score: " + initScores.score[i];
+    highScoreList.appendChild(P);
   }
   stopTimer();
 }
 
-function ClearScores() {
+function clearScores() {
   //here the Score list will be cleared
-  HighScoreList.textContent = "";
-  InitScores.Initials = [];
-  InitScores.Score = [];
+  highScoreList.textContent = "";
+  initScores.initials = [];
+  initScores.score = [];
 }
