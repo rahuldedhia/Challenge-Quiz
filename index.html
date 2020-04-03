@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Quiz</title>
+
+    <!-- Bootstrap stylesheet linking -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <!-- google font styles for Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto&display=swap" />
+    <!-- Include Jquery  used for navigation, footer & by bootstrap library -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- Required for Bootstrap library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <!-- Bootstrap JS library   -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <Main class="container">
+        <!-- Heading on the page -->
+        <section class="row">
+            <div class="col-md-12 text-center my-3">
+                <h2>Coding Quiz Challenge</h2>
+            </div>
+        </section>
+
+        <!-- First section to provide the introduction and start the quiz -->
+        <section class="row" id="startcontent">
+            <div class="col-md-12 text-center my-3">
+                <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
+                    answers will penalize your screen time by ten seconds.</p>
+            </div>
+            <div class="col-md-12 my-3">
+                <button type="button" class="btn btn-primary" onclick="StartQuiz()">Start Quiz</button>
+            </div>
+        </section>
+
+        <!-- Section to display the timer and quiz questions with answer options-->
+        <section class="row" id="content">
+            <div class="col-md-12 text-left my-3 ml-3">
+                <div class="col-md-12 text-left my-3 mr-3">
+                    <div class="row">
+                        <h4>Time:</h4>&nbsp;
+                        <h4 id="timerSec"></h4>
+                    </div>
+                </div>
+
+                <div class="row my-3" id="Question">
+                    <h5>Question</h5>
+                </div>
+                <div class="row my-3">
+                    <div class="col-md-12 text-left">
+                        <ul id="ans-list">
+                            <li class="row my-3">
+                                <button type="button" class="btn btn-primary" id="ans-opt1" onclick="NextQ(1)"></button>
+                            </li>
+                            <li class="row my-3">
+                                <button type="button" class="btn btn-primary" id="ans-opt2" onclick="NextQ(2)"></button>
+                            </li>
+                            <li class="row my-3">
+                                <button type="button" class="btn btn-primary" id="ans-opt3" onclick="NextQ(3)"></button>
+                            </li>
+                            <li class="row my-3">
+                                <button type="button" class="btn btn-primary" id="ans-opt4" onclick="NextQ(4)"></button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Displays if the answer is right or wrong -->
+                    <div class="row my-3">
+                        <div class="col-md-12 text-left">
+                            <hr>
+                            <p id="answer"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- This section displays the quiz complete message and final score -->
+        <section class="row" id="endcontent">
+            <div class="col-md-12 text-center my-3">
+                <h4>All Done</h4>
+                <h3 id="finalscore"></h3>
+            </div>
+            <!-- This div gives an option to enter the initials -->
+            <div class="col-md-12 my-3">
+                <form id="initials-form" method="POST">
+                    <label form="initials-text">Enter Initials:</label>
+                    <input type="text" name="initials-text" id="initials-text" />
+                    <button type="button" class="btn btn-primary" onclick="EndQuiz()">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- This section lists the highest scores in the order they were scored -->
+        <section class="row" id="scorelist">
+            <div class="col-md-12 text-center my-3">
+                <h4>High Scores List</h4>
+                <div id="highscorelist"></div>
+            </div>
+            <div class="col-md-12 my-3">
+                <button type="button" class="btn btn-primary" onclick="StartQuiz()">Go Back</button>
+                <button type="button" class="btn btn-primary" onclick="ClearScores()">Clear High Scores</button>
+            </div>
+        </section>
+
+    </Main>
+    <script src="./script.js"></script>
+</body>
